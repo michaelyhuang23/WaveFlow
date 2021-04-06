@@ -1,5 +1,7 @@
 ## WaveFlow: A Compact Flow-based Model for Raw Audio
 
+#### Update: Pretrained weights are now available. See links below.
+
 This is an unofficial PyTorch implementation of [WaveFlow] (Ping et al, ICML 2020) model.
 
 The aim for this repo is to provide easy-to-use PyTorch version of WaveFlow as a drop-in alternative to various neural vocoder models used with NVIDIA's [Tacotron2] audio processing backend.
@@ -71,7 +73,15 @@ Please refer to the [official implementation] written in PaddlePaddle for the of
    ```
    if `fp16_run: true`, the model uses FP16 (half-precision) arithmetic for faster performance (on GPUs equipped with Tensor Cores).
    
-   
+### Pretrained Weights
+
+We provide pretrained weights via Google Drive. The models are trained for 5 M steps, then we averaged weights over 20 last checkpoints with `-a 20`. Audio quality almost matches the original paper. 
+
+| Models        | Download |
+|:-------------:|:-------------:|
+| waveflow-h16-r64-bipartize      |[Link](https://drive.google.com/file/d/1z402Lvb3D3no469NpC_7PkIHB8V140gj/view?usp=sharing) |
+| waveflow-h16-r128-bipartize       |[Link](https://drive.google.com/file/d/12tKPQMu79kr29oMloNLIl0I0l86SyPdX/view?usp=sharing) |
+
 ## Reference
 NVIDIA Tacotron2: https://github.com/NVIDIA/waveglow
 
