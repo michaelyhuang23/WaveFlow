@@ -106,6 +106,7 @@ class Mel2Samp(torch.utils.data.Dataset):
         else:
             melspec = self.stft.mel_spectrogram(audio_norm)
         melspec = torch.squeeze(melspec, 0)
+        melspec = torch.zeros_like(melspec)
         return melspec
 
     def __getitem__(self, index):
