@@ -401,7 +401,8 @@ def synthesize_master(model, num_gpus, temp, output_directory, epochs, learning_
     # remove all weight_norm from the model
     model.remove_weight_norm()
     # fuse mel-spec conditioning layer weights to maximize speed
-    model.fuse_conditioning_layers()
+    # remove this step to do the debugging, becuase we can't fuse if we want forward
+    # model.fuse_conditioning_layers()
 
     if fp16_run:
         from apex import amp
@@ -430,14 +431,21 @@ def synthesize_master(model, num_gpus, temp, output_directory, epochs, learning_
     model.eval()
     for i, batch in enumerate(synth_loader):
         with torch.no_grad():
-            mel, _, filename = batch
+            mel, original_audio, filename = batch
             mel = torch.autograd.Variable(mel.cuda())
             if fp16_run:
                 mel = mel.half()
+            
+            original_audio = original_audio.cuda()
+            z = model(original_audio, mel)[0]
 
             torch.cuda.synchronize()
             tic = time.time()
-            audio = model.reverse_fast(mel, temp)
+
+            # use reverse insetad of reverse_fast if we remove fusing conv layers
+            # audio = model.reverse_fast(mel, temp, debug_z=z)
+            audio = model.reverse(mel, temp, debug_z=z)
+            
             torch.cuda.synchronize()
             toc = time.time() - tic
 

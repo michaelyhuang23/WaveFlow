@@ -7,10 +7,10 @@
         "lr_decay_step": 3000000,
         "lr_decay_gamma": 0.5,
         "sigma": 1.0,
-        "iters_per_checkpoint": 5000,
+        "iters_per_checkpoint": 100,
         "batch_size": 8,
         "seed": 1234,
-        "checkpoint_path": "",
+        "checkpoint_path": "experiments/waveflow-h16-r64-bipartize/waveflow_27400",
         "with_tensorboard": true
     },
     "data_config": {

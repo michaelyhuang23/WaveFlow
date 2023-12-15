@@ -248,6 +248,12 @@ class WaveFlow(nn.Module):
         else:
             z = debug_z
 
+            # somehow, z's shape is slightly too big (13776 vs 13744), so turn it down
+            z = z[:,:,:,:c.size(3)]
+        
+        # print(z.size())
+        # print(c.size())
+
         for i, flow in enumerate(self.flows[::-1]):
             i_flow = self.n_flow - (i+1)
             z, c = flow.reverse(z, c, i_flow)
