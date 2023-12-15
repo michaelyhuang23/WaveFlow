@@ -444,7 +444,7 @@ def synthesize_master(model, num_gpus, temp, output_directory, epochs, learning_
 
             # use reverse insetad of reverse_fast if we remove fusing conv layers
             # audio = model.reverse_fast(mel, temp, debug_z=z)
-            audio = model.reverse(mel, temp, debug_z=z)
+            audio = model.reverse(mel, temp)
             
             torch.cuda.synchronize()
             toc = time.time() - tic
