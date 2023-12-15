@@ -7,4 +7,4 @@
 
 module load anaconda/2023a
 
-python train.py -c configs/waveflow-h16-r64-bipartize.json
+python train.py --synthesize -c configs/waveflow-h16-r64-bipartize.json
